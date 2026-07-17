@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# VŌGE
 
-## Getting Started
+A premium, modern e-commerce platform curated for the discerning wardrobe. Built with Next.js App Router, Tailwind CSS v4, and React, VŌGE delivers a cinematic, high-performance shopping experience characterized by modern aesthetics, glassmorphism, and flawless dark/light mode integration.
 
-First, run the development server:
+---
 
+## ✦ Features
+
+- **Cinematic UI/UX:** A bespoke design language utilizing a luxurious Obsidian, Champagne Gold, and Dusty Rose color palette.
+- **Dynamic Theming:** Seamless, flicker-free transition between Light and Dark modes. Tailwind's native colors dynamically adapt via a custom CSS Variable architecture.
+- **Responsive & Interactive:** Fully responsive across all devices with micro-animations, hover states, and frosted-glass navigation.
+- **Comprehensive E-Commerce Routing:** 
+  - **Product Catalog:** Filterable and sortable grids across categories (Panjabi, Outerwear, T-Shirts, etc.).
+  - **Customer Portal:** Dedicated `/profile` for tracking orders, wishlist items, and personal details.
+  - **Info Hub:** Detailed `/size-guide`, `/shipping`, `/returns`, and `/faq` pages.
+- **State Management:** React Context-driven state for the Cart, Wishlist, User Profile, and Theme.
+- **Optimized Performance:** Next.js Server Components mixed with targeted Client Components for high SEO and blazing-fast load times.
+
+---
+
+## ✦ Tech Stack
+
+- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Library:** React 19
+- **Styling:** Tailwind CSS v4 + Vanilla CSS Variables
+- **Icons:** Lucide React
+- **Typography:** Playfair Display (Editorial) & DM Sans (Body)
+
+---
+
+## ✦ Getting Started
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) (v18 or higher) installed.
+
+### 1. Clone & Install
+Clone the repository and install the dependencies:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/your-username/voge-fashion-store.git
+cd voge-fashion-store
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Run the Development Server
+Start the Next.js development server using Turbopack:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. Build for Production
+To create an optimized production build:
+```bash
+npm run build
+npm run start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## ✦ Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```text
+src/
+├── app/                  # Next.js App Router (Pages, Layouts, Globals)
+│   ├── about/            # Story & Company Pages
+│   ├── products/         # Main Catalog & Dynamic Product Routes
+│   ├── profile/          # User Dashboard
+│   └── globals.css       # Core Design Tokens & Theme Logic
+├── components/           # Reusable UI Components
+│   ├── Navbar.tsx        # Global Glassmorphism Header
+│   ├── Footer.tsx        # Comprehensive Site Footer
+│   ├── ProductCard.tsx   # Catalog Item Component
+│   └── ...
+├── context/              # Global State (Theme, Profile, Cart, Toast)
+└── data/                 # Mock Database (Products, Testimonials, FAQs)
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ✦ Contributing
 
-## Deploy on Vercel
+We welcome contributions to make VŌGE even better. 
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Fork the repository**
+2. **Create a feature branch:** `git checkout -b feature/your-feature-name`
+3. **Commit your changes:** `git commit -m 'feat: add some amazing feature'`
+4. **Push to the branch:** `git push origin feature/your-feature-name`
+5. **Open a Pull Request**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Code Style Guidelines
+- **CSS Architecture:** Avoid hardcoding colors like `bg-gray-500` or `#fff` into components unless explicitly necessary. Always rely on the CSS variables defined in `globals.css` (e.g., `var(--text-primary)`, `var(--bg-card)`) to ensure perfect compatibility with Dark Mode.
+- **Component Structure:** Keep Server Components by default; only use `"use client"` when interactivity or React hooks are required.
+
+---
+
+## ✦ License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+---
+*Crafted with precision. Worn everywhere.*
