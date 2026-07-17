@@ -384,9 +384,20 @@ const TABS: { id: Tab; label: string; icon: React.ReactNode }[] = [
   { id: "coupons",  label: "Coupons",      icon: <Tag size={16} /> },
 ];
 
-export default function ProfilePage() {
-  const [activeTab, setActiveTab] = useState<Tab>("overview");
+import { useSearchParams, useRouter } from "next/navigation";
+import { Suspense } from "react";
+
+// ─── Main Profile Page Content ────────────────────────────────────────────────
+function ProfileContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const tabParam = searchParams.get("tab") as Tab | null;
+  const activeTab = tabParam && TABS.some(t => t.id === tabParam) ? tabParam : "overview";
   const { profile, wishlist, orders } = useProfile();
+
+  const setActiveTab = (tab: Tab) => {
+    router.push(`/profile?tab=${tab}`);
+  };
 
   return (
     <div style={{ fontFamily: "var(--font-body)" }}>
@@ -445,5 +456,13 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function ProfilePage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="w-8 h-8 rounded-full border-4 border-t-transparent animate-spin" style={{ borderColor: "var(--brand)", borderTopColor: "transparent" }} /></div>}>
+      <ProfileContent />
+    </Suspense>
   );
 }
