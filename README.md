@@ -1,40 +1,34 @@
-# VŌGE
+# VŌGE E-Commerce Storefront
 
-A premium, modern e-commerce platform curated for the discerning wardrobe. Built with Next.js App Router, Tailwind CSS v4, and React, VŌGE delivers a cinematic, high-performance shopping experience characterized by modern aesthetics, glassmorphism, and flawless dark/light mode integration.
+This is a modern fashion e-commerce storefront built for the Oxivos Frontend Developer project task. It is a frontend-only application that uses local JSON dummy data to demonstrate layout, state management, and component architecture without requiring a backend.
 
----
+## Overview
 
-## ✦ Features
+The project implements a complete shopping flow from product discovery to cart management. It satisfies all core and bonus requirements of the assessment, including responsive grids, dynamic routing, state management, and a custom theme system.
 
-- **Cinematic UI/UX:** A bespoke design language utilizing a luxurious Obsidian, Champagne Gold, and Dusty Rose color palette.
-- **Dynamic Theming:** Seamless, flicker-free transition between Light and Dark modes. Tailwind's native colors dynamically adapt via a custom CSS Variable architecture.
-- **Responsive & Interactive:** Fully responsive across all devices with micro-animations, hover states, and frosted-glass navigation.
-- **Comprehensive E-Commerce Routing:** 
-  - **Product Catalog:** Filterable and sortable grids across categories (Panjabi, Outerwear, T-Shirts, etc.).
-  - **Customer Portal:** Dedicated `/profile` for tracking orders, wishlist items, and personal details.
-  - **Info Hub:** Detailed `/size-guide`, `/shipping`, `/returns`, and `/faq` pages.
-- **State Management:** React Context-driven state for the Cart, Wishlist, User Profile, and Theme.
-- **Optimized Performance:** Next.js Server Components mixed with targeted Client Components for high SEO and blazing-fast load times.
+### Key Features
+- **Home Page:** Hero banner with a responsive grid of featured products.
+- **Product Listing:** Full catalog with dynamic category filtering.
+- **Product Details:** Dedicated dynamic routes for individual items with size/color selectors and an "Add to Cart" action.
+- **Cart System:** Global state management for cart items, quantities, and total price calculations.
+- **Dark/Light Mode:** Custom CSS variable architecture that seamlessly toggles the UI theme.
+- **Wishlist:** Ability to save products for later using global state.
 
----
+## Tech Stack
 
-## ✦ Tech Stack
-
-- **Framework:** Next.js 16 (App Router, Turbopack)
+- **Framework:** Next.js 16 (App Router)
 - **Library:** React 19
 - **Styling:** Tailwind CSS v4 + Vanilla CSS Variables
 - **Icons:** Lucide React
-- **Typography:** Playfair Display (Editorial) & DM Sans (Body)
+- **Data:** Local dummy data (no backend or database required)
 
----
-
-## ✦ Getting Started
+## Getting Started
 
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) (v18 or higher) installed.
+Node.js (v18 or higher) must be installed.
 
 ### 1. Clone & Install
-Clone the repository and install the dependencies:
+Clone the repository and install the required dependencies:
 ```bash
 git clone https://github.com/your-username/voge-fashion-store.git
 cd voge-fashion-store
@@ -42,11 +36,11 @@ npm install
 ```
 
 ### 2. Run the Development Server
-Start the Next.js development server using Turbopack:
+Start the local development server:
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+Navigate to [http://localhost:3000](http://localhost:3000) in your browser to view the application.
 
 ### 3. Build for Production
 To create an optimized production build:
@@ -55,47 +49,26 @@ npm run build
 npm run start
 ```
 
----
-
-## ✦ Project Structure
+## Project Structure
 
 ```text
 src/
-├── app/                  # Next.js App Router (Pages, Layouts, Globals)
-│   ├── about/            # Story & Company Pages
-│   ├── products/         # Main Catalog & Dynamic Product Routes
-│   ├── profile/          # User Dashboard
-│   └── globals.css       # Core Design Tokens & Theme Logic
-├── components/           # Reusable UI Components
-│   ├── Navbar.tsx        # Global Glassmorphism Header
-│   ├── Footer.tsx        # Comprehensive Site Footer
-│   ├── ProductCard.tsx   # Catalog Item Component
-│   └── ...
-├── context/              # Global State (Theme, Profile, Cart, Toast)
-└── data/                 # Mock Database (Products, Testimonials, FAQs)
+├── app/                  # Next.js App Router (Pages & Layouts)
+│   ├── cart/             # Cart Page
+│   ├── products/         # Product Listing & Dynamic Routes
+│   ├── wishlist/         # Wishlist Page
+│   └── globals.css       # Core CSS Variables & Theme Logic
+├── components/           # Reusable UI Components (Navbar, Footer, Cards)
+├── context/              # React Context Providers (Theme, Cart, Wishlist)
+└── data/                 # Local Dummy Data (products.ts)
 ```
 
----
+## Development Notes
 
-## ✦ Contributing
+- **State Management:** React Context is used to handle global state (Cart, Wishlist, Theme) to keep the architecture clean without introducing heavy third-party state libraries.
+- **Styling Approach:** Tailwind CSS is used for utility-class styling, supplemented by custom CSS variables in `globals.css` to handle the dynamic dark mode overriding. 
+- **Routing:** Built using Next.js App Router for client-side navigation and optimal performance.
 
-We welcome contributions to make VŌGE even better. 
+## License
 
-1. **Fork the repository**
-2. **Create a feature branch:** `git checkout -b feature/your-feature-name`
-3. **Commit your changes:** `git commit -m 'feat: add some amazing feature'`
-4. **Push to the branch:** `git push origin feature/your-feature-name`
-5. **Open a Pull Request**
-
-### Code Style Guidelines
-- **CSS Architecture:** Avoid hardcoding colors like `bg-gray-500` or `#fff` into components unless explicitly necessary. Always rely on the CSS variables defined in `globals.css` (e.g., `var(--text-primary)`, `var(--bg-card)`) to ensure perfect compatibility with Dark Mode.
-- **Component Structure:** Keep Server Components by default; only use `"use client"` when interactivity or React hooks are required.
-
----
-
-## ✦ License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
----
-*Crafted with precision. Worn everywhere.*
+This project is open source and available under the MIT License.
