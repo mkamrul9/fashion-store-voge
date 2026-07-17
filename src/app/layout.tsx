@@ -3,17 +3,18 @@ import "./globals.css";
 import { CartProvider } from "@/context/CartContext";
 import { ToastProvider } from "@/context/ToastContext";
 import { ProfileProvider } from "@/context/ProfileContext";
+import { ThemeProvider } from "@/context/ThemeContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Fashion Store — Premium Modern Apparel",
+  title: "VŌGE — Luxury Fashion Store",
   description:
-    "Discover curated contemporary fashion at Fashion Store. Premium quality clothing, accessories, and footwear designed for lasting impact.",
-  keywords: ["fashion", "clothing", "premium apparel", "Bangladesh fashion store"],
+    "Discover curated contemporary fashion at VŌGE. Premium quality clothing, accessories, and footwear designed for the discerning wardrobe.",
+  keywords: ["fashion", "clothing", "luxury apparel", "premium fashion", "Bangladesh fashion"],
   openGraph: {
-    title: "Fashion Store — Premium Modern Apparel",
-    description: "Curated contemporary fashion for the modern wardrobe.",
+    title: "VŌGE — Luxury Fashion Store",
+    description: "Curated contemporary fashion for the discerning wardrobe.",
     type: "website",
   },
 };
@@ -24,21 +25,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* Prevent FOUC: apply theme before paint */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){try{var t=localStorage.getItem('fs_theme');if(t==='dark'||t==='light'){document.documentElement.setAttribute('data-theme',t);}else if(window.matchMedia('(prefers-color-scheme:dark)').matches){document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();`,
+          }}
+        />
       </head>
-      <body className="min-h-screen bg-white antialiased">
-        <ToastProvider>
-          <ProfileProvider>
-            <CartProvider>
-              <Navbar />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </CartProvider>
-          </ProfileProvider>
-        </ToastProvider>
+      <body className="min-h-screen antialiased" style={{ background: "var(--bg-primary)", color: "var(--text-primary)" }}>
+        <ThemeProvider>
+          <ToastProvider>
+            <ProfileProvider>
+              <CartProvider>
+                <Navbar />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </CartProvider>
+            </ProfileProvider>
+          </ToastProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

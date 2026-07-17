@@ -173,7 +173,7 @@ const SEED_ORDERS: Order[] = [
         category: "Panjabi",
         quantity: 1,
         price: 2800,
-        image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=400&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1617952236317-0bd127407984?q=80&w=400&auto=format&fit=crop",
       },
     ],
     total: 2800,

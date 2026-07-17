@@ -30,7 +30,7 @@ export const products: Product[] = [
         name: "Silk Embroidered Panjabi",
         category: "Panjabi",
         price: 2800,
-        image: "https://images.unsplash.com/photo-1583391733956-6c78276477e2?q=80&w=800&auto=format&fit=crop",
+        image: "https://images.unsplash.com/photo-1617952236317-0bd127407984?q=80&w=800&auto=format&fit=crop",
         rating: 4.7,
         colors: ["Cream", "Sky Blue", "Gold"],
         sizes: ["S", "M", "L", "XL"],

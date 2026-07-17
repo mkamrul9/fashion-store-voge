@@ -27,12 +27,13 @@ const YoutubeIcon = () => (
 
 const shopLinks = [
   { label: "New Arrivals",  href: "/products" },
-  { label: "Panjabi",       href: "/products" },
-  { label: "Outerwear",     href: "/products" },
-  { label: "T-Shirts",     href: "/products" },
-  { label: "Trousers",     href: "/products" },
-  { label: "Accessories",  href: "/products" },
-  { label: "Footwear",     href: "/products" },
+  { label: "Panjabi",       href: "/products?cat=Panjabi" },
+  { label: "Outerwear",     href: "/products?cat=Outerwear" },
+  { label: "T-Shirts",     href: "/products?cat=T-Shirts" },
+  { label: "Trousers",     href: "/products?cat=Trousers" },
+  { label: "Accessories",  href: "/products?cat=Accessories" },
+  { label: "Footwear",     href: "/products?cat=Footwear" },
+  { label: "Wishlist",     href: "/wishlist" },
 ];
 
 const helpLinks = [
@@ -45,10 +46,10 @@ const helpLinks = [
 
 const companyLinks = [
   { label: "About Us",      href: "/about" },
-  { label: "Careers",       href: "/about" },
-  { label: "Sustainability", href: "/about" },
+  { label: "Careers",       href: "/careers" },
+  { label: "Sustainability", href: "/sustainability" },
   { label: "My Profile",    href: "/profile" },
-  { label: "My Orders",     href: "/profile" },
+  { label: "My Orders",     href: "/profile?tab=orders" },
 ];
 
 export default function Footer() {
@@ -64,7 +65,7 @@ export default function Footer() {
   };
 
   return (
-    <footer style={{ background: "var(--navy)", fontFamily: "var(--font-body)" }} className="text-white">
+    <footer style={{ background: "var(--obsidian)", fontFamily: "var(--font-body)" }} className="text-white">
 
       {/* Main grid */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
@@ -72,16 +73,15 @@ export default function Footer() {
 
           {/* Brand column */}
           <div className="lg:col-span-2 space-y-6">
-            <Link href="/" aria-label="Fashion Store Home">
-              <span className="text-3xl font-semibold tracking-wide" style={{ fontFamily: "var(--font-editorial)" }}>
-                <span className="text-gradient-brand">FASHION</span>
-                <span className="font-light text-white/70"> STORE</span>
+            <Link href="/" aria-label="VŌGE Home">
+              <span className="text-3xl font-bold tracking-[0.1em]" style={{ fontFamily: "var(--font-editorial)", color: "#fff" }}>
+                V<span style={{ color: "var(--brand)" }}>Ō</span>GE
               </span>
             </Link>
 
-            <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-              Curating contemporary essentials for the modern wardrobe since 2020.
-              Premium quality, timeless design, delivered to your door.
+            <p className="text-white/55 text-sm leading-relaxed max-w-xs">
+              Curating contemporary essentials for the discerning wardrobe since 2020.
+              Obsidian quality. Gold standard. Delivered to your door.
             </p>
 
             <ul className="space-y-2 text-sm text-white/50">
@@ -95,7 +95,7 @@ export default function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail size={14} style={{ color: "var(--brand)", flexShrink: 0 }} />
-                <span>hello@fashionstore.com</span>
+                <span>hello@voge.com</span>
               </li>
             </ul>
 
@@ -118,7 +118,7 @@ export default function Footer() {
                     (e.currentTarget as HTMLElement).style.borderColor = "";
                     (e.currentTarget as HTMLElement).style.color = "";
                   }}
-                  onClick={() => toast.info(`Follow us on ${s.label}! (Link coming soon)`)}
+                  onClick={() => toast.info(`Follow us on ${s.label}! (Coming soon)`)}
                 >
                   {s.icon}
                 </button>
@@ -201,10 +201,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">© {new Date().getFullYear()} Fashion Store. All rights reserved.</p>
+          <p className="text-xs text-white/40">© {new Date().getFullYear()} VŌGE. All rights reserved.</p>
           <div className="flex items-center gap-5 text-xs text-white/40">
-            <Link href="/about" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
-            <Link href="/about" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+            <Link href="/privacy" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="hover:text-white/70 transition-colors">Terms of Service</Link>
             <Link href="/contact" className="hover:text-white/70 transition-colors">Contact</Link>
           </div>
           <div className="flex items-center gap-2 text-white/30 text-xs">
