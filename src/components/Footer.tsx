@@ -1,8 +1,9 @@
 "use client";
 import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/context/ToastContext";
 
-// Inline social SVGs (not available in this version of lucide-react)
 const InstagramIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
@@ -24,51 +25,56 @@ const YoutubeIcon = () => (
   </svg>
 );
 
-
 const shopLinks = [
-  { label: "New Arrivals", href: "/products" },
-  { label: "Panjabi", href: "/products" },
-  { label: "Outerwear", href: "/products" },
-  { label: "T-Shirts", href: "/products" },
-  { label: "Trousers", href: "/products" },
-  { label: "Accessories", href: "/products" },
-  { label: "Footwear", href: "/products" },
+  { label: "New Arrivals",  href: "/products" },
+  { label: "Panjabi",       href: "/products" },
+  { label: "Outerwear",     href: "/products" },
+  { label: "T-Shirts",     href: "/products" },
+  { label: "Trousers",     href: "/products" },
+  { label: "Accessories",  href: "/products" },
+  { label: "Footwear",     href: "/products" },
 ];
 
 const helpLinks = [
-  { label: "Size Guide", href: "#" },
-  { label: "Shipping Policy", href: "#" },
-  { label: "Returns & Exchanges", href: "#" },
-  { label: "Track My Order", href: "#" },
-  { label: "Contact Us", href: "#" },
-  { label: "FAQ", href: "#" },
+  { label: "Size Guide",         href: "/size-guide" },
+  { label: "Shipping Policy",    href: "/shipping" },
+  { label: "Returns & Exchanges",href: "/returns" },
+  { label: "Contact Us",         href: "/contact" },
+  { label: "FAQ",                href: "/faq" },
 ];
 
 const companyLinks = [
-  { label: "About Us", href: "#" },
-  { label: "Careers", href: "#" },
-  { label: "Press", href: "#" },
-  { label: "Sustainability", href: "#" },
-  { label: "Store Locator", href: "#" },
+  { label: "About Us",      href: "/about" },
+  { label: "Careers",       href: "/about" },
+  { label: "Sustainability", href: "/about" },
+  { label: "My Profile",    href: "/profile" },
+  { label: "My Orders",     href: "/profile" },
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+  const toast = useToast();
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setSubscribed(true);
+    toast.success("You're subscribed! Welcome to Fashion Store 🎉");
+  };
+
   return (
-    <footer
-      style={{ background: "var(--charcoal)", fontFamily: "var(--font-body)" }}
-      className="text-white"
-    >
-      {/* Main Footer Body */}
+    <footer style={{ background: "var(--navy)", fontFamily: "var(--font-body)" }} className="text-white">
+
+      {/* Main grid */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 lg:gap-8">
-          {/* Brand Column */}
+
+          {/* Brand column */}
           <div className="lg:col-span-2 space-y-6">
             <Link href="/" aria-label="Fashion Store Home">
-              <span
-                style={{ fontFamily: "var(--font-editorial)", color: "var(--gold)" }}
-                className="text-3xl font-semibold tracking-wide"
-              >
-                FASHION
+              <span className="text-3xl font-semibold tracking-wide" style={{ fontFamily: "var(--font-editorial)" }}>
+                <span className="text-gradient-brand">FASHION</span>
                 <span className="font-light text-white/70"> STORE</span>
               </span>
             </Link>
@@ -78,67 +84,55 @@ export default function Footer() {
               Premium quality, timeless design, delivered to your door.
             </p>
 
-            {/* Contact Info */}
             <ul className="space-y-2 text-sm text-white/50">
               <li className="flex items-center gap-2">
-                <MapPin size={14} className="text-gold flex-shrink-0" style={{ color: "var(--gold)" }} />
+                <MapPin size={14} style={{ color: "var(--brand)", flexShrink: 0 }} />
                 <span>Dhaka, Bangladesh</span>
               </li>
               <li className="flex items-center gap-2">
-                <Phone size={14} className="flex-shrink-0" style={{ color: "var(--gold)" }} />
+                <Phone size={14} style={{ color: "var(--brand)", flexShrink: 0 }} />
                 <span>+880 1700-000000</span>
               </li>
               <li className="flex items-center gap-2">
-                <Mail size={14} className="flex-shrink-0" style={{ color: "var(--gold)" }} />
+                <Mail size={14} style={{ color: "var(--brand)", flexShrink: 0 }} />
                 <span>hello@fashionstore.com</span>
               </li>
             </ul>
 
-            {/* Social Icons */}
-            <div className="flex items-center gap-4 pt-2">
+            <div className="flex items-center gap-3 pt-1">
               {[
-              { icon: <InstagramIcon />, label: "Instagram", href: "#" },
-              { icon: <FacebookIcon />, label: "Facebook", href: "#" },
-              { icon: <TwitterIcon />, label: "Twitter", href: "#" },
-              { icon: <YoutubeIcon />, label: "YouTube", href: "#" },
-            ].map((s) => (
-                <a
+                { icon: <InstagramIcon />, label: "Instagram" },
+                { icon: <FacebookIcon />,  label: "Facebook"  },
+                { icon: <TwitterIcon />,   label: "Twitter"   },
+                { icon: <YoutubeIcon />,   label: "YouTube"   },
+              ].map((s) => (
+                <button
                   key={s.label}
-                  href={s.href}
                   aria-label={s.label}
-                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/60
-                    hover:border-gold hover:text-gold transition-all duration-200"
-                  style={{ "--gold": "var(--gold)" } as React.CSSProperties}
+                  className="w-9 h-9 rounded-full border border-white/20 flex items-center justify-center text-white/50 hover:text-white transition-all duration-200"
                   onMouseEnter={(e) => {
-                    (e.currentTarget as HTMLElement).style.borderColor = "var(--gold)";
-                    (e.currentTarget as HTMLElement).style.color = "var(--gold)";
+                    (e.currentTarget as HTMLElement).style.borderColor = "var(--brand)";
+                    (e.currentTarget as HTMLElement).style.color = "var(--brand)";
                   }}
                   onMouseLeave={(e) => {
                     (e.currentTarget as HTMLElement).style.borderColor = "";
                     (e.currentTarget as HTMLElement).style.color = "";
                   }}
+                  onClick={() => toast.info(`Follow us on ${s.label}! (Link coming soon)`)}
                 >
                   {s.icon}
-                </a>
+                </button>
               ))}
             </div>
           </div>
 
-          {/* Shop Links */}
+          {/* Shop */}
           <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "var(--gold)" }}
-            >
-              Shop
-            </h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "var(--brand)" }}>Shop</h4>
             <ul className="space-y-3">
               {shopLinks.map((link) => (
                 <li key={link.label}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors duration-200">
                     {link.label}
                   </Link>
                 </li>
@@ -146,23 +140,15 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Help Links */}
+          {/* Help */}
           <div>
-            <h4
-              className="text-xs font-bold uppercase tracking-widest mb-5"
-              style={{ color: "var(--gold)" }}
-            >
-              Help
-            </h4>
+            <h4 className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "var(--brand)" }}>Help</h4>
             <ul className="space-y-3">
               {helpLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-white/60 hover:text-white transition-colors duration-200"
-                  >
+                  <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors duration-200">
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -171,90 +157,60 @@ export default function Footer() {
           {/* Company + Newsletter */}
           <div className="space-y-8">
             <div>
-              <h4
-                className="text-xs font-bold uppercase tracking-widest mb-5"
-                style={{ color: "var(--gold)" }}
-              >
-                Company
-              </h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-5" style={{ color: "var(--brand)" }}>Company</h4>
               <ul className="space-y-3">
                 {companyLinks.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-white/60 hover:text-white transition-colors duration-200"
-                    >
+                    <Link href={link.href} className="text-sm text-white/60 hover:text-white transition-colors duration-200">
                       {link.label}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Newsletter */}
             <div>
-              <h4
-                className="text-xs font-bold uppercase tracking-widest mb-3"
-                style={{ color: "var(--gold)" }}
-              >
-                Newsletter
-              </h4>
-              <p className="text-xs text-white/50 mb-3">
-                Get new arrivals & exclusive offers.
-              </p>
-              <form
-                onSubmit={(e) => e.preventDefault()}
-                className="flex flex-col gap-2"
-              >
-                <input
-                  type="email"
-                  placeholder="Your email address"
-                  className="w-full px-3 py-2.5 rounded text-sm text-white bg-white/10 border border-white/20
-                    placeholder:text-white/40 focus:outline-none focus:border-gold transition-colors"
-                  style={{ fontFamily: "var(--font-body)" }}
-                  onFocus={(e) => (e.currentTarget.style.borderColor = "var(--gold)")}
-                  onBlur={(e) => (e.currentTarget.style.borderColor = "")}
-                />
-                <button
-                  type="submit"
-                  className="w-full py-2.5 rounded text-xs font-bold uppercase tracking-widest transition-all duration-200"
-                  style={{
-                    background: "var(--gold)",
-                    color: "var(--charcoal)",
-                    fontFamily: "var(--font-body)",
-                  }}
-                  onMouseEnter={(e) =>
-                    ((e.currentTarget as HTMLElement).style.background = "var(--gold-dark)")
-                  }
-                  onMouseLeave={(e) =>
-                    ((e.currentTarget as HTMLElement).style.background = "var(--gold)")
-                  }
-                >
-                  Subscribe
-                </button>
-              </form>
+              <h4 className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: "var(--brand)" }}>Newsletter</h4>
+              <p className="text-xs text-white/50 mb-3">Get new arrivals & exclusive offers.</p>
+              {subscribed ? (
+                <p className="text-xs font-semibold" style={{ color: "var(--brand)" }}>
+                  ✓ You&apos;re subscribed!
+                </p>
+              ) : (
+                <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Your email address"
+                    required
+                    className="w-full px-3 py-2.5 rounded text-sm text-white bg-white/10 border border-white/20 placeholder:text-white/40 focus:outline-none transition-colors"
+                    onFocus={(e) => (e.currentTarget.style.borderColor = "var(--brand)")}
+                    onBlur={(e) => (e.currentTarget.style.borderColor = "")}
+                  />
+                  <button type="submit" className="btn-brand w-full py-2.5 text-xs">
+                    Subscribe
+                  </button>
+                </form>
+              )}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Divider */}
+      {/* Bottom bar */}
       <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/40">
-            © {new Date().getFullYear()} Fashion Store. All rights reserved.
-          </p>
-          <div className="flex items-center gap-6 text-xs text-white/40">
-            <a href="#" className="hover:text-white/70 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white/70 transition-colors">Cookie Settings</a>
+          <p className="text-xs text-white/40">© {new Date().getFullYear()} Fashion Store. All rights reserved.</p>
+          <div className="flex items-center gap-5 text-xs text-white/40">
+            <Link href="/about" className="hover:text-white/70 transition-colors">Privacy Policy</Link>
+            <Link href="/about" className="hover:text-white/70 transition-colors">Terms of Service</Link>
+            <Link href="/contact" className="hover:text-white/70 transition-colors">Contact</Link>
           </div>
-          {/* Payment badges */}
           <div className="flex items-center gap-2 text-white/30 text-xs">
-            <span className="border border-white/20 rounded px-2 py-0.5">Visa</span>
-            <span className="border border-white/20 rounded px-2 py-0.5">MasterCard</span>
-            <span className="border border-white/20 rounded px-2 py-0.5">bKash</span>
-            <span className="border border-white/20 rounded px-2 py-0.5">Nagad</span>
+            {["Visa", "MasterCard", "bKash", "Nagad"].map((p) => (
+              <span key={p} className="border border-white/20 rounded px-2 py-0.5">{p}</span>
+            ))}
           </div>
         </div>
       </div>
